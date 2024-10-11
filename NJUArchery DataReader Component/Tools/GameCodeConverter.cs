@@ -1,6 +1,4 @@
-﻿using Org.BouncyCastle.Asn1.Mozilla;
-
-namespace Archery_Competition_Webserver.Tools
+﻿namespace Archery_Competition_Webserver.Tools
 {
     public enum GameMode
     {

@@ -1,6 +1,4 @@
-﻿using Org.BouncyCastle.Asn1.Mozilla;
-
-namespace Archery_Competition_Webserver.Basement
+﻿namespace Archery_Competition_Webserver.Basement
 {
 
 
