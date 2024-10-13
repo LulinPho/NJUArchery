@@ -167,7 +167,8 @@ namespace Archery_Competition_Webserver.Basement
          * These two nodes must belong to the same parent.
          * The winnerId must match one of the two nodes.
          */ 
-        public void UpdateMatchResult(EliminationTreeNode leftNode, EliminationTreeNode rightNode, int winnerId)
+        public void UpdateMatchResult(ITreeNode<EliminationPlayer> leftNode, ITreeNode<EliminationPlayer> rightNode,
+            int winnerId)
         {
             // sanity checks first
             if (leftNode.Parent == null || rightNode.Parent == null || 

@@ -23,8 +23,10 @@ namespace TestDataReader
          * The Ids of the players does not really care..
          */ 
         [TestMethod]
+        [DataRow(4)]
         [DataRow(16)]
         [DataRow(12)]
+        [DataRow(48)]
         public void TestEliminationTreeGeneration(int numPlayers)
         {
             LocLogger.LogInformation($"TestEliminationTreeGeneration: numPlayers={numPlayers}");
@@ -42,6 +44,8 @@ namespace TestDataReader
             Assert.IsTrue(CheckNodeChildrenRec(tree.Root));
 
             Assert.IsTrue(CheckFirstRoundPlayers(tree, playerIds));
+
+            SimulatedCompetition(tree);
         }
 
         private bool CheckNodeChildrenRec(ITreeNode<EliminationPlayer> root)
@@ -85,6 +89,26 @@ namespace TestDataReader
             playerIdsSort.Sort();
             players.Sort();
             return playerIdsSort.SequenceEqual(playerIds);
+        }
+
+        /**
+         * Do a simulated competition. I.e. for each match, the winner is picked randomly.
+         * The matches are performed until only one player remains in the tree.
+         * Currently, only test that the matches could be end for finite time.
+         */ 
+        private void SimulatedCompetition(EliminationTree tree)
+        {
+            var matches = tree.GetBottomMatchPlayers();
+            var rng = new Random();
+            while (matches.Count > 0)
+            {
+                foreach(var m in matches)
+                {
+                    int winnerId = rng.Next(1) == 0? m.PlayerA.Content.Id : m.PlayerB.Content.Id;
+                    tree.UpdateMatchResult(m.PlayerA, m.PlayerB, winnerId);
+                }
+                matches = tree.GetBottomMatchPlayers();
+            }
         }
     }
 }
