@@ -5,9 +5,11 @@ VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NJUArchery SQL Component", "..\NJUArchery SQL Component\NJUArchery SQL Component.csproj", "{FC9509AA-27D0-4F25-8149-995470AA63FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NJUArchery DataReader Component", "NJUArchery DataReader Component\NJUArchery DataReader Component.csproj", "{B964AB96-CC46-4814-B7CD-5247B9FE40E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NJUArchery DataReader Component", "NJUArchery DataReader Component\NJUArchery DataReader Component.csproj", "{B964AB96-CC46-4814-B7CD-5247B9FE40E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NJUArchery WebClient Component", "NJUArchery WebClient Component\NJUArchery WebClient Component.csproj", "{64BCA5F6-348A-40EA-AC9B-81C7DCFB0233}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NJUArchery WebClient Component", "NJUArchery WebClient Component\NJUArchery WebClient Component.csproj", "{64BCA5F6-348A-40EA-AC9B-81C7DCFB0233}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataReader", "TestEliminationTree\TestDataReader.csproj", "{65BD9A8B-DB1E-40B9-A32E-709B3A22313C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{64BCA5F6-348A-40EA-AC9B-81C7DCFB0233}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64BCA5F6-348A-40EA-AC9B-81C7DCFB0233}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64BCA5F6-348A-40EA-AC9B-81C7DCFB0233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65BD9A8B-DB1E-40B9-A32E-709B3A22313C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65BD9A8B-DB1E-40B9-A32E-709B3A22313C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65BD9A8B-DB1E-40B9-A32E-709B3A22313C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65BD9A8B-DB1E-40B9-A32E-709B3A22313C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
