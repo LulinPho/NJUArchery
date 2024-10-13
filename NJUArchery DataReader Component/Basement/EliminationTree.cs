@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Archery_Competition_Webserver.Basement
 {
@@ -14,6 +15,7 @@ namespace Archery_Competition_Webserver.Basement
            Rank = rank;
         }
     }
+
     public class EliminationTreeNode : ITreeNode<EliminationPlayer>
     {
         public EliminationPlayer Content { get; set; }
@@ -29,6 +31,16 @@ namespace Archery_Competition_Webserver.Basement
             LeftChildNode = leftChildNode;
             RightChildNode = rightChildNode;
         }
+    }
+
+    /**
+     * The struct for each pair of the players that would take part in a match game.
+     */
+    public struct MatchPlayersInfo
+    {
+        public int Layer { get; set; }
+        public ITreeNode<EliminationPlayer> PlayerA { get; set; }
+        public ITreeNode<EliminationPlayer> PlayerB { get; set; }
     }
 
     public class EliminationTree : ITree<EliminationPlayer>
@@ -171,6 +183,73 @@ namespace Archery_Competition_Webserver.Basement
 
             int par_rank = leftNode.Parent.Content.Rank;
             leftNode.Parent.Content = new EliminationPlayer(winnerId, par_rank);
+        }
+
+        /**
+         * Returns the player pairs for which match game will be taken place, i.e. the pairs
+         * (that belonging to the same parent) with results not determined yet.
+         */ 
+        public List<MatchPlayersInfo> GetMatchPlayers()
+        {
+            List<MatchPlayersInfo> result = [];
+            GetMatchPlayersRec(result, Root, 0);
+            return result;
+        }
+
+        /**
+         * Returns the player pairs that belong to the bottom layer (with maximal layer id).
+         * Note that the players for matches may belong to two layers, typically at the beginning of the
+         * elimination matches, for example, when the total number of players is 12.
+         */  
+        public List<MatchPlayersInfo> GetBottomMatchPlayers()
+        {
+            var result = GetMatchPlayers();
+            if (result.Count == 0)
+                return result;
+            // Select the maximal id
+            int maxLayer = result.MaxBy(p => p.Layer).Layer;
+            return result.Where(p => p.Layer == maxLayer).ToList();
+        }
+
+        private void GetMatchPlayersRec(List<MatchPlayersInfo> result, ITreeNode<EliminationPlayer> root,  int currentLayer)
+        {
+            if (root == null)
+            {
+                return;
+            }
+            if (root.Content.Id >= 0)
+            {
+                return;
+            }
+            if (root.LeftChildNode == null && root.RightChildNode == null)
+            {
+                // This is leave node; nothing to do.
+                return;
+            }
+            else if (root.LeftChildNode == null || root.RightChildNode == null)
+            {
+                throw new InvalidDataException("Only one of Left or Right child is not null");
+            }
+
+            // Now, left and right are not null
+            if (root.Content.Id < 0)
+            {
+                if (root.LeftChildNode.Content.Id >= 0 && root.RightChildNode.Content.Id >= 0)
+                {
+                    result.Add(new MatchPlayersInfo
+                    {
+                        Layer = currentLayer + 1,
+                        PlayerA = root.LeftChildNode,
+                        PlayerB = root.RightChildNode
+                    });
+                }
+                else
+                {
+                    // All undetermined; recursion
+                    GetMatchPlayersRec(result, root.LeftChildNode, currentLayer + 1);
+                    GetMatchPlayersRec(result, root.RightChildNode, currentLayer + 1);
+                }
+            }
         }
 
         public int GetDepth()

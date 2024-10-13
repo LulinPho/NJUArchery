@@ -8,20 +8,14 @@ namespace TestDataReader
     [TestClass]
     public class TestEliminationTree
     {
-        private ILogger logger { get; set; } 
+        private ILogger LocLogger { get; set; } 
 
         [TestInitialize]
         public void Init()
         {
             var factory = LoggerFactory.Create(builder => builder.AddConsole());
-            logger = factory.CreateLogger("TestEliminationTree");
-            logger.LogInformation("Test class created");
-        }
-
-        [TestMethod]
-        public void TestMethod()
-        {
-            TestEliminationTreeGeneration(12);
+            LocLogger = factory.CreateLogger("TestEliminationTree");
+            LocLogger.LogInformation("Test class created");
         }
 
         /**
@@ -33,7 +27,7 @@ namespace TestDataReader
         [DataRow(12)]
         public void TestEliminationTreeGeneration(int numPlayers)
         {
-            logger.LogInformation($"TestEliminationTreeGeneration: numPlayers={numPlayers}");
+            LocLogger.LogInformation($"TestEliminationTreeGeneration: numPlayers={numPlayers}");
             List<int> playerIds=new List<int>();
             for (int i = 0; i < numPlayers; i++)
             {
@@ -47,7 +41,7 @@ namespace TestDataReader
             // also check the ranks of the nodes
             Assert.IsTrue(CheckNodeChildrenRec(tree.Root));
 
-            // TODO: Check the playerIds in the bottom layer(s).
+            Assert.IsTrue(CheckFirstRoundPlayers(tree, playerIds));
         }
 
         private bool CheckNodeChildrenRec(ITreeNode<EliminationPlayer> root)
@@ -58,13 +52,13 @@ namespace TestDataReader
             }
             else if (root.LeftChildNode == null || root.RightChildNode == null)
             {
-                logger.LogError("Left or right child is not null but the other is");
+                LocLogger.LogError("Left or right child is not null but the other is");
                 return false;
             }
 
             if (root.LeftChildNode.Content.Rank >= root.RightChildNode.Content.Rank)
             {
-                logger.LogError($"Left child rank is greater or equal to the right one");
+                LocLogger.LogError($"Left child rank is greater or equal to the right one");
                 return false;
             }
 
@@ -72,6 +66,25 @@ namespace TestDataReader
             res =res && CheckNodeChildrenRec(root.LeftChildNode);
             res = res && CheckNodeChildrenRec(root.RightChildNode);
             return res;
+        }
+
+        /**
+         * Check that the player Ids in the first round is exactly the input players
+         */ 
+        private bool CheckFirstRoundPlayers(EliminationTree tree, IList<int> playerIds)
+        {
+            var matchPlayers = tree.GetMatchPlayers();
+            List<int> players = new List<int>();
+            foreach (var p in matchPlayers)
+            {
+                players.Add(p.PlayerA.Content.Id);
+                players.Add(p.PlayerB.Content.Id);
+            }
+
+            List<int> playerIdsSort = new List<int>(playerIds);   // Copy construct
+            playerIdsSort.Sort();
+            players.Sort();
+            return playerIdsSort.SequenceEqual(playerIds);
         }
     }
 }
