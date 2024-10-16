@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NJUArchery SQL Component", "..\NJUArchery SQL Component\NJUArchery SQL Component.csproj", "{FC9509AA-27D0-4F25-8149-995470AA63FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NJUArchery DataReader Component", "NJUArchery DataReader Component\NJUArchery DataReader Component.csproj", "{B964AB96-CC46-4814-B7CD-5247B9FE40E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NJUArchery DataReader Component", "NJUArchery DataReader Component\NJUArchery DataReader Component.csproj", "{B964AB96-CC46-4814-B7CD-5247B9FE40E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NJUArchery WebClient Component", "NJUArchery WebClient Component\NJUArchery WebClient Component.csproj", "{64BCA5F6-348A-40EA-AC9B-81C7DCFB0233}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NJUArchery WebClient Component", "NJUArchery WebClient Component\NJUArchery WebClient Component.csproj", "{64BCA5F6-348A-40EA-AC9B-81C7DCFB0233}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NJUArchery SQL Component", "NJUArchery SQL Component\NJUArchery SQL Component.csproj", "{97B94D82-F3B9-4C85-83F9-72A820C2280F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NJUArchery WebServer Component", "NJUArchery WebServer Component\NJUArchery WebServer Component.csproj", "{4C8323CC-9128-4397-9E30-C63521B0705D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FC9509AA-27D0-4F25-8149-995470AA63FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC9509AA-27D0-4F25-8149-995470AA63FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC9509AA-27D0-4F25-8149-995470AA63FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC9509AA-27D0-4F25-8149-995470AA63FA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B964AB96-CC46-4814-B7CD-5247B9FE40E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B964AB96-CC46-4814-B7CD-5247B9FE40E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B964AB96-CC46-4814-B7CD-5247B9FE40E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +25,14 @@ Global
 		{64BCA5F6-348A-40EA-AC9B-81C7DCFB0233}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64BCA5F6-348A-40EA-AC9B-81C7DCFB0233}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64BCA5F6-348A-40EA-AC9B-81C7DCFB0233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97B94D82-F3B9-4C85-83F9-72A820C2280F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97B94D82-F3B9-4C85-83F9-72A820C2280F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97B94D82-F3B9-4C85-83F9-72A820C2280F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97B94D82-F3B9-4C85-83F9-72A820C2280F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C8323CC-9128-4397-9E30-C63521B0705D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C8323CC-9128-4397-9E30-C63521B0705D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C8323CC-9128-4397-9E30-C63521B0705D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C8323CC-9128-4397-9E30-C63521B0705D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

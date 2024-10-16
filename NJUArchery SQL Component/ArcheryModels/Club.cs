@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NJUArchery_SQL_Component.AcheryModels;
+namespace NJUArchery_SQL_Component.ArcheryModels;
 
 public partial class Club
 {
@@ -11,7 +11,7 @@ public partial class Club
 
     public string? Location { get; set; }
 
-    public virtual ICollection<Bow> Bows { get; set; } = new List<Bow>();
+    public virtual ICollection<Equipment> Equipment { get; set; } = new List<Equipment>();
 
     public virtual ICollection<Player> Players { get; set; } = new List<Player>();
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace NJUArchery_SQL_Component.AcheryModels;
+namespace NJUArchery_SQL_Component.ArcheryModels;
 
 public partial class ArcherymanagementContext : DbContext
 {
@@ -17,11 +17,11 @@ public partial class ArcherymanagementContext : DbContext
 
     public virtual DbSet<Arrow> Arrows { get; set; }
 
-    public virtual DbSet<Bow> Bows { get; set; }
-
     public virtual DbSet<Club> Clubs { get; set; }
 
     public virtual DbSet<Competition> Competitions { get; set; }
+
+    public virtual DbSet<Equipment> Equipment { get; set; }
 
     public virtual DbSet<Game> Games { get; set; }
 
@@ -31,7 +31,7 @@ public partial class ArcherymanagementContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySQL("server=localhost;port=3306;uid=root;pwd=Peng_2001;database=archerymanagement");
+        => optionsBuilder.UseMySQL("server=127.0.0.1;port=3306;uid=root;pwd=Peng_2001;database=archerymanagement");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -55,40 +55,6 @@ public partial class ArcherymanagementContext : DbContext
                 .HasForeignKey(d => d.RoundId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("source_round");
-        });
-
-        modelBuilder.Entity<Bow>(entity =>
-        {
-            entity.HasKey(e => e.BowId).HasName("PRIMARY");
-
-            entity.ToTable("bow");
-
-            entity.HasIndex(e => e.ClubId, "club_owner");
-
-            entity.HasIndex(e => e.PlayerId, "owner");
-
-            entity.Property(e => e.BowId).HasColumnName("bow_id");
-            entity.Property(e => e.ClubId).HasColumnName("club_id");
-            entity.Property(e => e.Name)
-                .HasMaxLength(255)
-                .HasColumnName("name");
-            entity.Property(e => e.PlayerId).HasColumnName("player_id");
-            entity.Property(e => e.Tension)
-                .HasMaxLength(255)
-                .HasColumnName("tension");
-            entity.Property(e => e.Type)
-                .HasColumnType("enum('recurve','barebow','tradition','compound')")
-                .HasColumnName("type");
-
-            entity.HasOne(d => d.Club).WithMany(p => p.Bows)
-                .HasForeignKey(d => d.ClubId)
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("club_owner");
-
-            entity.HasOne(d => d.Player).WithMany(p => p.Bows)
-                .HasForeignKey(d => d.PlayerId)
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("owner");
         });
 
         modelBuilder.Entity<Club>(entity =>
@@ -129,6 +95,47 @@ public partial class ArcherymanagementContext : DbContext
             entity.Property(e => e.Title)
                 .HasMaxLength(255)
                 .HasColumnName("title");
+        });
+
+        modelBuilder.Entity<Equipment>(entity =>
+        {
+            entity.HasKey(e => e.EquipmentId).HasName("PRIMARY");
+
+            entity.ToTable("equipment");
+
+            entity.HasIndex(e => e.ClubId, "club_owner");
+
+            entity.HasIndex(e => e.PlayerId, "owner");
+
+            entity.Property(e => e.EquipmentId).HasColumnName("equipment_id");
+            entity.Property(e => e.ClubId)
+                .HasComment("Owner")
+                .HasColumnName("club_id");
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .HasColumnName("name");
+            entity.Property(e => e.Note)
+                .HasMaxLength(255)
+                .HasColumnName("note");
+            entity.Property(e => e.PlayerId)
+                .HasComment("Owner")
+                .HasColumnName("player_id");
+            entity.Property(e => e.Pounds)
+                .HasComment("Only for bow and bow piece.")
+                .HasColumnName("pounds");
+            entity.Property(e => e.Type)
+                .HasComment("To describe the type of this equipment, for example: Bow, BowString, etc. Decided by encoder from datareader.")
+                .HasColumnName("type");
+
+            entity.HasOne(d => d.Club).WithMany(p => p.Equipment)
+                .HasForeignKey(d => d.ClubId)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("club_owner");
+
+            entity.HasOne(d => d.Player).WithMany(p => p.Equipment)
+                .HasForeignKey(d => d.PlayerId)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("owner");
         });
 
         modelBuilder.Entity<Game>(entity =>

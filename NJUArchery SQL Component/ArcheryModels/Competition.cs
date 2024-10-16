@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NJUArchery_SQL_Component.AcheryModels;
+namespace NJUArchery_SQL_Component.ArcheryModels;
 
 public partial class Competition
 {
