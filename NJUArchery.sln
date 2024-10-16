@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NJUArchery WebClient Compon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NJUArchery SQL Component", "NJUArchery SQL Component\NJUArchery SQL Component.csproj", "{97B94D82-F3B9-4C85-83F9-72A820C2280F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NJUArchery WebServer Component", "NJUArchery WebServer Component\NJUArchery WebServer Component.csproj", "{4C8323CC-9128-4397-9E30-C63521B0705D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NJUArchery WebServer Component", "NJUArchery WebServer Component\NJUArchery WebServer Component.csproj", "{4C8323CC-9128-4397-9E30-C63521B0705D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
